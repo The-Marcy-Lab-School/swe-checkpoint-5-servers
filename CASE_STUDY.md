@@ -41,7 +41,7 @@ With the case study server running locally, use Postman to send the following re
 
 ## Question 3: REST Analysis
 
-Look at the endpoints defined in `case-study/server/index.js`. For each endpoint, identify:
+Look at the endpoints defined in `case-study/server/index.js`. For each endpoint, notice:
 - The **HTTP method**
 - The **URL pattern**
 - The **CRUD operation** it performs (Create, Read, Update, or Delete)

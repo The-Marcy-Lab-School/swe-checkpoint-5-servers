@@ -27,8 +27,8 @@ Why is it dangerous to use API keys in client-side (frontend) code? Explain how 
 **Your Answer:**
 
 
-## Question 4: MVC Architecture
+## Question 4: Debugging a Server
 
-What is the Model-View-Controller (MVC) pattern? What does each layer do? Why is it beneficial to separate an application into these layers instead of writing all logic in one file?
+A fellow student is building an Express server. They send a `PATCH` request to `/api/bookmarks/1` using Postman, but they receive a `404` status code. List at least three things you would check to debug this issue and explain why each one could be the cause of the problem.
 
 **Your Answer:**

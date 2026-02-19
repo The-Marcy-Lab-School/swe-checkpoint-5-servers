@@ -6,12 +6,20 @@ This is a 2-day checkpoint assessing your understanding of the first half of the
 **Day 2:** Build a Server
 
 **Sections:**
-1. [Short Response (24 points)](#part-1-short-response-24-points)
-2. [Case Study Investigation (24 points)](#part-2-case-study-investigation-24-points)
-3. [Yoodli AI Interview (18 points)](#part-3-yoodli-ai-interview-18-points)
-4. [Build a Server (34 points)](#part-4-build-a-server-34-points)
+- [Setup](#setup)
+- [Part 1: Short Response (24 points)](#part-1-short-response-24-points)
+- [Part 2: Yoodli AI Interview (TBD)](#part-2-yoodli-ai-interview-tbd)
+- [Part 3: Case Study Investigation (24 points)](#part-3-case-study-investigation-24-points)
+- [Part 4: Build a Server (34 points)](#part-4-build-a-server-34-points)
+  - [API Reference](#api-reference)
+  - [Step 1: Set Up the Express App (6 pts)](#step-1-set-up-the-express-app-6-pts)
+  - [Step 2: Build the Model (8 pts)](#step-2-build-the-model-8-pts)
+  - [Step 3: Build the Controllers (10 pts)](#step-3-build-the-controllers-10-pts)
+  - [Step 4: Define REST Endpoints (4 pts)](#step-4-define-rest-endpoints-4-pts)
+  - [Step 5: Test with Postman (6 pts)](#step-5-test-with-postman-6-pts)
+  - [Code Grading Checklist (34 points)](#code-grading-checklist-34-points)
 
-**Total: 100 points**
+**Total: 82 points + Yoodli (TBD)**
 
 **<details><summary>Asking ChatGPT for Help</summary>**
 
@@ -30,7 +38,8 @@ For guidance on setting up and submitting this assignment, refer to the Marcy La
 ```sh
 git checkout -b draft   # switch to the draft branch before starting
 
-npm i                   # install dependencies (for the Build a Server section)
+cd from-scratch         # navigate to the Build a Server folder
+npm i                   # install dependencies
 npm run dev             # start the server with nodemon
 
 git add -A              # add changed files to the staging area
@@ -50,11 +59,27 @@ The questions assess your knowledge of:
 1. Servers and the HTTP request-response cycle
 2. Express middleware
 3. API key security and the proxy pattern
-4. MVC architecture
+4. Debugging a server
 
 ---
 
-## Part 2: Case Study Investigation (24 points)
+## Part 2: Yoodli AI Interview (TBD)
+
+Complete 2 Yoodli AI interview roleplays. Your instructor will provide the Yoodli links and rubric.
+
+The roleplays assess your ability to verbally explain:
+
+1. How the internet works — servers, clients, HTTP, deployment
+2. REST and MVC — REST conventions, endpoint design, MVC architecture
+
+**Tips:**
+- Use proper technical vocabulary (server, client, request, response, endpoint, middleware, controller, model, etc.)
+- Give concrete examples when possible
+- It's okay to pause and think — clarity matters more than speed
+
+---
+
+## Part 3: Case Study Investigation (24 points)
 
 For this section, you will investigate a working Express application called **Bookmark Manager**.
 
@@ -81,7 +106,7 @@ case-study/
 ├── public/
 │   ├── index.html                        # Frontend HTML
 │   ├── styles.css                        # Frontend CSS
-│   └── app.js                            # Frontend JavaScript (fetch calls)
+│   └── app.js                            # Frontend JavaScript (fetch calls & DOM helpers)
 └── package.json
 ```
 
@@ -95,47 +120,38 @@ Answer the 4 investigation questions in [`CASE_STUDY.md`](./CASE_STUDY.md). Each
 
 ---
 
-## Part 3: Yoodli AI Interview (18 points)
-
-Complete 3 Yoodli AI interview roleplays. Each roleplay is worth 6 points. Your instructor will provide the Yoodli links.
-
-The roleplays assess your ability to verbally explain:
-
-1. **How the internet works** — servers, clients, HTTP, deployment
-2. **Express and middleware** — what Express is, how middleware works, real examples
-3. **REST and MVC** — REST conventions, endpoint design, MVC architecture
-
-**Tips:**
-- Use proper technical vocabulary (server, client, request, response, endpoint, middleware, controller, model, etc.)
-- Give concrete examples when possible
-- It's okay to pause and think — clarity matters more than speed
-
----
-
 ## Part 4: Build a Server (34 points)
 
 Build a working Express server with MVC architecture that powers the provided frontend application.
 
+Navigate to the `from-scratch/` folder to work on this section:
+
+```sh
+cd from-scratch
+npm i
+npm run dev
+```
+
 **Provided (do not modify):**
-- `public/` — A frontend application (HTML, CSS, and JavaScript) that sends `fetch` requests to your server's API. If your server is implemented correctly, the frontend will work without any changes.
-- `package.json` — Project configuration with `express` as a dependency
+- `from-scratch/public/` — A frontend application (HTML, CSS, and JavaScript) that sends `fetch` requests to your server's API. If your server is implemented correctly, the frontend will work without any changes.
+- `from-scratch/package.json` — Project configuration with `express` as a dependency
 
 **Files you complete:**
-- `server/index.js` — Express app setup, middleware, and endpoint definitions
-- `server/models/Item.js` — In-memory data model
-- `server/controllers/itemControllers.js` — Controller functions
+- `from-scratch/server/index.js` — Express app setup, middleware, and endpoint definitions
+- `from-scratch/server/models/Item.js` — In-memory data model
+- `from-scratch/server/controllers/itemControllers.js` — Controller functions
 
 ### API Reference
 
 The frontend expects the following API endpoints to exist on your server:
 
-| Method | Endpoint | Request Body | Description | Success Status |
-|--------|----------|-------------|-------------|----------------|
-| `POST` | `/api/items` | `{ "name": "..." }` | Create a new item | `201` |
-| `GET` | `/api/items` | — | Get all items | `200` |
-| `GET` | `/api/items/:id` | — | Get a single item by ID | `200` |
-| `PATCH` | `/api/items/:id` | `{ "name": "..." }` | Update an item's name | `200` |
-| `DELETE` | `/api/items/:id` | — | Delete an item | `200` |
+| Method   | Endpoint         | Request Body        | Description             | Success Status |
+| -------- | ---------------- | ------------------- | ----------------------- | -------------- |
+| `POST`   | `/api/items`     | `{ "name": "..." }` | Create a new item       | `201`          |
+| `GET`    | `/api/items`     | —                   | Get all items           | `200`          |
+| `GET`    | `/api/items/:id` | —                   | Get a single item by ID | `200`          |
+| `PATCH`  | `/api/items/:id` | `{ "name": "..." }` | Update an item's name   | `200`          |
+| `DELETE` | `/api/items/:id` | —                   | Delete an item          | `200`          |
 
 **Error responses:**
 - Return `404` with `{ "message": "..." }` when an item is not found
@@ -143,14 +159,14 @@ The frontend expects the following API endpoints to exist on your server:
 
 ### Step 1: Set Up the Express App (6 pts)
 
-In `server/index.js`:
+In `from-scratch/server/index.js`:
 1. Create a `logRoutes` middleware function that logs the method and URL of every request (along with the current time) and calls `next()`
 2. Register middleware in this order: `logRoutes`, `express.json()`, `express.static()`
 3. The server should listen on port `8080`
 
 ### Step 2: Build the Model (8 pts)
 
-In `server/models/Item.js`:
+In `from-scratch/server/models/Item.js`:
 1. Create an `id` counter and a `getId()` helper function
 2. Create an in-memory array with 2-3 starter items (each with an `id` and `name`)
 3. Implement all 5 static methods: `create`, `list`, `find`, `update`, `delete`
@@ -158,7 +174,7 @@ In `server/models/Item.js`:
 
 ### Step 3: Build the Controllers (10 pts)
 
-In `server/controllers/itemControllers.js`:
+In `from-scratch/server/controllers/itemControllers.js`:
 1. Import the `Item` model
 2. Implement all 5 controller functions: `createItem`, `listItems`, `getItem`, `updateItem`, `deleteItem`
 3. Each controller should parse inputs from `req`, call the appropriate model method, and send the response with the correct status code
@@ -166,7 +182,7 @@ In `server/controllers/itemControllers.js`:
 
 ### Step 4: Define REST Endpoints (4 pts)
 
-In `server/index.js`:
+In `from-scratch/server/index.js`:
 1. Import the controllers
 2. Define all 5 RESTful routes (see the API Reference table above)
 3. Routes should be defined after middleware registration
