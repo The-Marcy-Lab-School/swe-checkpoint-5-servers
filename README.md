@@ -8,17 +8,15 @@ This is a 2-day checkpoint assessing your understanding of the first half of the
 **Sections:**
 - [Setup](#setup)
 - [Part 1: Short Response (24 points)](#part-1-short-response-24-points)
-- [Part 2: Yoodli AI Interview (TBD)](#part-2-yoodli-ai-interview-tbd)
-- [Part 3: Build a Server (34 points)](#part-3-build-a-server-34-points)
+- [Part 2: Yoodli AI Interview (20 points)](#part-2-yoodli-ai-interview-20-points)
+- [Part 3: Build a Server (28 points)](#part-3-build-a-server-28-points)
   - [API Reference](#api-reference)
   - [Step 1: Set Up the Express App (6 pts)](#step-1-set-up-the-express-app-6-pts)
   - [Step 2: Build the Model (8 pts)](#step-2-build-the-model-8-pts)
   - [Step 3: Build the Controllers (10 pts)](#step-3-build-the-controllers-10-pts)
   - [Step 4: Define REST Endpoints (4 pts)](#step-4-define-rest-endpoints-4-pts)
-  - [Step 5: Test with Postman (6 pts)](#step-5-test-with-postman-6-pts)
-  - [Code Grading Checklist (34 points)](#code-grading-checklist-34-points)
-
-**Total: 58 points + Yoodli (TBD)**
+  - [Step 5: Test with Curl](#step-5-test-with-curl)
+  - [Code Grading Checklist (28 points)](#code-grading-checklist-28-points)
 
 **<details><summary>Asking ChatGPT for Help</summary>**
 
@@ -61,9 +59,9 @@ The questions assess your knowledge of:
 
 ---
 
-## Part 2: Yoodli AI Interview (TBD)
+## Part 2: Yoodli AI Interview (20 points)
 
-Complete 2 Yoodli AI interview roleplays. Your instructor will provide the Yoodli links and rubric.
+Complete 2 Yoodli AI interview roleplays.
 
 The roleplays assess your ability to verbally explain:
 
@@ -77,7 +75,7 @@ The roleplays assess your ability to verbally explain:
 
 ---
 
-## Part 3: Build a Server (34 points)
+## Part 3: Build a Server (28 points)
 
 Build a working Express server with MVC architecture that powers the provided frontend application.
 
@@ -141,9 +139,9 @@ In `server/index.js`:
 2. Define all 5 RESTful routes (see the API Reference table above)
 3. Routes should be defined after middleware registration
 
-### Step 5: Test with Postman (6 pts)
+### Step 5: Test with Curl
 
-After your server is working, use Postman to test each endpoint. Take screenshots or export your Postman collection and include them in a `postman/` folder.
+After your server is working, use `curl` to test each endpoint.
 
 You must demonstrate:
 1. A successful `POST` creating a new pet (showing 201 status)
@@ -153,7 +151,7 @@ You must demonstrate:
 5. A `DELETE` removing a pet
 6. A follow-up `GET` confirming the pet was deleted
 
-### Code Grading Checklist (34 points)
+### Code Grading Checklist (28 points)
 
 **Express Setup (6 pts)**
 - [ ] Express app is created and listens on a port
@@ -191,10 +189,3 @@ You must demonstrate:
 - [ ] All 5 CRUD routes are defined
 - [ ] Routes are defined after middleware registration
 
-**Postman Testing (6 pts)**
-- [ ] `POST` screenshot shows `201` status and created pet
-- [ ] `GET` all screenshot shows the list of pets
-- [ ] `GET` by invalid ID shows `404` status and error message
-- [ ] `PATCH` screenshot shows updated pet
-- [ ] `DELETE` screenshot shows the deleted pet
-- [ ] Follow-up `GET` confirms deletion
