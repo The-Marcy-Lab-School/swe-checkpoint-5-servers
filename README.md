@@ -1,22 +1,15 @@
-# Checkpoint 5.1: Backend Fundamentals
-
-This is a 2-day checkpoint assessing your understanding of the first half of the Backend module.
-
-**Day 1:** Short Response + Yoodli AI Interview
-**Day 2:** Build a Server
+# swe-checkpoint-5-servers
 
 **Sections:**
 - [Setup](#setup)
-- [Part 1: Short Response (24 points)](#part-1-short-response-24-points)
-- [Part 2: Yoodli AI Interview (20 points)](#part-2-yoodli-ai-interview-20-points)
-- [Part 3: Build a Server (28 points)](#part-3-build-a-server-28-points)
+- [Build a Server (28 points)](#build-a-server-28-points)
   - [API Reference](#api-reference)
-  - [Step 1: Set Up the Express App (6 pts)](#step-1-set-up-the-express-app-6-pts)
-  - [Step 2: Build the Model (8 pts)](#step-2-build-the-model-8-pts)
-  - [Step 3: Build the Controllers (10 pts)](#step-3-build-the-controllers-10-pts)
-  - [Step 4: Define REST Endpoints (4 pts)](#step-4-define-rest-endpoints-4-pts)
-  - [Step 5: Test with Curl](#step-5-test-with-curl)
-  - [Code Grading Checklist (28 points)](#code-grading-checklist-28-points)
+  - [Step 1: Set Up the Express App](#step-1-set-up-the-express-app)
+  - [Step 2: Build the Model](#step-2-build-the-model)
+  - [Step 3: Build the Controllers](#step-3-build-the-controllers)
+  - [Step 4: Define REST Endpoints](#step-4-define-rest-endpoints)
+- [Testing with Curl](#testing-with-curl)
+- [Complete Code Grading Checklist (28 points)](#complete-code-grading-checklist-28-points)
 
 **<details><summary>Asking ChatGPT for Help</summary>**
 
@@ -45,44 +38,9 @@ git push                # push the new commit to the remote repo
 
 When you are finished, create a pull request and tag your instructor for review.
 
----
-
-## Part 1: Short Response (24 points)
-
-There are 4 short response questions for you to answer in the [`short-response.md`](./short-response.md) file. Each question is worth 6 points (3 points for writing quality and 3 points for technical content).
-
-The questions assess your knowledge of:
-1. Servers and the HTTP request-response cycle
-2. Express middleware
-3. API key security and the proxy pattern
-4. Debugging a server
-
----
-
-## Part 2: Yoodli AI Interview (20 points)
-
-Complete 2 Yoodli AI interview roleplays.
-
-The roleplays assess your ability to verbally explain:
-
-1. How the internet works — servers, clients, HTTP, deployment
-2. REST and MVC — REST conventions, endpoint design, MVC architecture
-
-**Tips:**
-- Use proper technical vocabulary (server, client, request, response, endpoint, middleware, controller, model, etc.)
-- Give concrete examples when possible
-- It's okay to pause and think — clarity matters more than speed
-
----
-
-## Part 3: Build a Server (28 points)
+## Build a Server (28 points)
 
 Build a working Express server with MVC architecture that powers the provided frontend application.
-
-```sh
-npm i
-npm run dev
-```
 
 **Provided (do not modify):**
 - `frontend/` — A frontend application (HTML, CSS, and JavaScript) that sends `fetch` requests to your server's API. If your server is implemented correctly, the frontend will work without any changes.
@@ -109,22 +67,22 @@ The frontend expects the following API endpoints to exist on your server:
 - Return `404` with `{ "message": "..." }` when a pet is not found
 - Return `400` with `{ "message": "..." }` when a required field (`name`) is missing
 
-### Step 1: Set Up the Express App (6 pts)
+### Step 1: Set Up the Express App
 
 In `server/index.js`:
 1. Create a `logRoutes` middleware function that logs the method and URL of every request (along with the current time) and calls `next()`
 2. Register middleware in this order: `logRoutes`, `express.json()`, `express.static()`
-3. The server should listen on port `8080`
+3. The `express.static()` middleware should serve static assets from the `frontend/` folder.
+4. The server should listen on port `8080`
 
-### Step 2: Build the Model (8 pts)
+### Step 2: Build the Model
 
 In `server/models/Pet.js`:
-1. Create an `id` counter and a `getId()` helper function
-2. Create an in-memory array with 2-3 starter pets (each with an `id` and `name`)
-3. Implement all 5 static methods: `create`, `list`, `find`, `update`, `delete`
-4. Model methods should NOT use `req` or `res` — they only manage data
+1. Create an in-memory array with 2-3 starter pets (each with an `id` and `name`). Use the `getId()` helper to assign each pet's `id`.
+2. Implement all 5 static methods: `create`, `list`, `find`, `update`, `delete`
+3. Model methods should NOT use `req` or `res` — they only manage data
 
-### Step 3: Build the Controllers (10 pts)
+### Step 3: Build the Controllers
 
 In `server/controllers/petControllers.js`:
 1. Import the `Pet` model
@@ -132,26 +90,52 @@ In `server/controllers/petControllers.js`:
 3. Each controller should parse inputs from `req`, call the appropriate model method, and send the response with the correct status code
 4. Handle error cases: return `400` for missing `name`, return `404` for pets not found
 
-### Step 4: Define REST Endpoints (4 pts)
+### Step 4: Define REST Endpoints
 
 In `server/index.js`:
 1. Import the controllers
 2. Define all 5 RESTful routes (see the API Reference table above)
 3. Routes should be defined after middleware registration
 
-### Step 5: Test with Curl
+## Testing with Curl
 
 After your server is working, use `curl` to test each endpoint.
 
 You must demonstrate:
-1. A successful `POST` creating a new pet (showing 201 status)
-2. A `GET` retrieving all pets
+1. A `GET` retrieving all pets
+2. A `GET` with a valid ID showing a 200 response
 3. A `GET` with an invalid ID showing a 404 response
-4. A `PATCH` successfully updating a pet
-5. A `DELETE` removing a pet
-6. A follow-up `GET` confirming the pet was deleted
+4. A successful `POST` creating a new pet (showing 201 status)
+5. A `PATCH` successfully updating a pet
+6. A `DELETE` removing a pet
+7. A follow-up `GET` confirming the pet was deleted
 
-### Code Grading Checklist (28 points)
+For reference, you can send an HTTP request using `curl`. Paste these curl requests one at a time and inspect the responses (Note: the `-i` flag shows response headers, the `-X` flag sets the method, the `-H` flag sets the headers, and the `-d` flag sets the request body):
+
+```sh
+# GET All
+curl http://localhost:8080/api/pets -i
+
+# GET One (invalid id)
+curl http://localhost:8080/api/pets/10000 -i
+
+# GET One
+curl http://localhost:8080/api/pets/1 -i
+
+# POST
+curl http://localhost:8080/api/pets -X POST -H "Content-Type: application/json" -d '{"name":"Skittles"}' -i
+
+# PATCH
+curl http://localhost:8080/api/pets/1 -X PATCH -H "Content-Type: application/json" -d '{"name":"Updated Name"}'
+
+# DELETE
+curl http://localhost:8080/api/pets/1 -X DELETE
+
+# GET All (confirm deletion)
+curl http://localhost:8080/api/pets -i
+```
+
+## Complete Code Grading Checklist (28 points)
 
 **Express Setup (6 pts)**
 - [ ] Express app is created and listens on a port
@@ -188,4 +172,3 @@ You must demonstrate:
 - [ ] Path parameters are used for single-resource endpoints (`:id`)
 - [ ] All 5 CRUD routes are defined
 - [ ] Routes are defined after middleware registration
-
